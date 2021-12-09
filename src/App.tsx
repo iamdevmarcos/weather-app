@@ -1,5 +1,6 @@
 import { useState, useEffect, FormEvent } from 'react';
 import api from './services/api';
+import showMessage from './helpers/showMessage';
 
 const App = () => {
   const [cityName, setCityName] = useState('');
@@ -15,7 +16,7 @@ const App = () => {
       }
 
     } else {
-      alert('Typing something!');
+      showMessage('field cannot be empty');
     }
   }
 

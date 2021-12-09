@@ -1,4 +1,5 @@
 import axios from 'axios';
+import showMessage from '../helpers/showMessage';
 
 const http = axios.create({
     baseURL: 'https://api.openweathermap.org'
@@ -11,7 +12,7 @@ const api = {
             return res.data;
         } catch(e) {
             console.log('error', e);
-            alert('City not found...');
+            showMessage('City not found...');
         }
     }
 }

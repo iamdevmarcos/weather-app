@@ -48,7 +48,7 @@ h1 {
 
 .resultado {
     width: 300px;
-    display: none;
+    display: block;
     border: 1px dotted #FFF;
     margin-top: 20px;
     border-radius: 5px;

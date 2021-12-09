@@ -29,7 +29,9 @@ const App = () => {
 
       <div className="aviso"></div>
 
-      <footer>Criado pela </footer>
+      <footer>
+        Made with 🤍 by <a href="https://github.com/iamdevmarcos" target="_blank">Marcos Andre</a>
+      </footer>
     </div>
   );
 }

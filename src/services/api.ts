@@ -12,7 +12,6 @@ const api = {
             return res.data;
         } catch(e) {
             console.log('error', e);
-            showMessage('City not found...');
         }
     }
 }

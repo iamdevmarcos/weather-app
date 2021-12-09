@@ -1,23 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import api from './services/api';
 
 const App = () => {
+  const [cityName, setCityName] = useState('');
 
-  useEffect(() => {
-    loadWeatherInfo();
-  }, []);
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    
+    if(cityName !== '') {
+      const result = await api.getWeatherInfo(cityName);
+      
+      if(result.cod === 200) {
+        console.log('achou', result);
+      }
 
-  const loadWeatherInfo = async () => {
-    const json = await api.getWeatherInfo('london');
+    } else {
+      alert('Typing something!');
+    }
   }
 
   return(
     <div>
       <h1>Clima</h1>
 
-      <form className="busca">
-          <input type="search" id="searchInput" />
-          <button>Buscar</button>
+      <form className="busca" onSubmit={handleSubmit}>
+          <input
+            type="search"
+            id="searchInput"
+            value={cityName}
+            onChange={e=>setCityName(e.target.value)}
+          />
+          <button>Search</button>
       </form>
 
       <div className="resultado">

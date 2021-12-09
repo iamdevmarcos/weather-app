@@ -1,4 +1,16 @@
+import { useState, useEffect } from 'react';
+import api from './services/api';
+
 const App = () => {
+
+  useEffect(() => {
+    loadWeatherInfo();
+  }, []);
+
+  const loadWeatherInfo = async () => {
+    const json = await api.getWeatherInfo('london');
+  }
+
   return(
     <div>
       <h1>Clima</h1>

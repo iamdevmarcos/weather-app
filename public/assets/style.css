@@ -5,6 +5,7 @@
 }
 
 body {
+    font-family: 'Work Sans', sans-serif !important;
     display: flex;
     min-height: 100vh;
     justify-content: center;
@@ -113,9 +114,10 @@ h1 {
     transform-origin: left;
 }
 
-.aviso {
+.warning {
+    text-align:center;
     color: #FFF;
-    padding-top: 20px;
+    font-size: 30px;
 }
 
 footer {

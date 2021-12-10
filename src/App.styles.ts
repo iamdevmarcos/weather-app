@@ -2,9 +2,9 @@ import styled from "@emotion/styled";
 
 export const Key = styled.span`
     font-family: Consolas !important;
-    background-color:#EDF2F7;
+    background-color:#777;
     border-radius: 5px;
-    border-bottom: 3px solid #CCC;
+    border-bottom: 3px solid #333;
     border-bottom-width:3px;
     font-size: 20px;
     font-weight: bold;
@@ -14,9 +14,9 @@ export const Key = styled.span`
     white-space: nowrap;
     margin:0px 5px;
     transition: all ease 0.2s;
-    color:#000;
+    color:#FFF;
     &&:hover {
-        background-color:#CCC;
+        background-color:#333;
         border-bottom-width:1px;
         cursor:pointer;
     }

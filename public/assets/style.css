@@ -141,6 +141,39 @@ footer a {
     text-decoration:none;
     color:#000;
     border-bottom:1px solid #CCC;
-    border-bottom-width:10px;
-    padding-bottom:-90px;
+    border-bottom-width:3px;
+    margin-left:5px !important;
+}
+
+footer .arrow--area {
+	display: flex;
+	justify-content: center;
+}
+
+@keyframes arrow {
+	0% {
+        margin-top: 0px;
+    }
+    25% {
+        margin-top: -5px;
+    }
+    30% {
+        margin-top: 0px;
+    }
+    40% {
+        margin-top: -3px;
+    }
+    50% {
+        margin-top: 0px;
+    }
+    100% {
+        margin-top: 0px;
+    }
+}
+
+footer .arrow {
+    margin:0px 5px;
+	animation-name: arrow;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
 }

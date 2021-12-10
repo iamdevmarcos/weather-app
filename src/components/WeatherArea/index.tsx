@@ -2,24 +2,40 @@ import { useState, FormEvent } from 'react';
 import api from '../../services/api';
 
 export const WeatherArea = () => {
-    const [cityName, setCityName] = useState('');
+    const [citySearch, setCitySearch] = useState('');
     const [infoAreaVisible, setInfoAreaVisible] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+
+    const [cityName, setCityName] = useState('');
+    const [cityTemp, setCityTemp] = useState('');
+    const [cityTempIcon, setCityTempIcon] = useState('');
+    const [cityWindSpeed, setCityWindSpeed] = useState('');
+    const [cityWindAngle, setCityWindAngle] = useState('');
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
     
-        if(cityName !== '') {
-            setInfoAreaVisible(true)
+        if(citySearch !== '') {
             setErrorMessage('');
-            const result = await api.getWeatherInfo(cityName);
+            const result = await api.getWeatherInfo(citySearch);
+
+            if(result) {
+                setCityName(`${result.name}, ${result.sys.country}`);
+                setCityTemp(result.main.temp);
+                setCityTempIcon(`http://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png`);
+                setCityWindSpeed(result.wind.speed);
+                setCityWindAngle(result.wind.deg);
+
+            }
+
+            setInfoAreaVisible(true)
         
             if(result) {
                 console.log('achou', result);
             } else {
                 setInfoAreaVisible(false);
-                setErrorMessage(`City ${cityName} not found...`);
-                setCityName('');
+                setErrorMessage(`City ${citySearch} not found...`);
+                setCitySearch('');
             }
 
         } else {
@@ -36,8 +52,8 @@ export const WeatherArea = () => {
                 <input
                     type="search"
                     id="searchInput"
-                    value={cityName}
-                    onChange={e=>setCityName(e.target.value)}
+                    value={citySearch}
+                    onChange={e=>setCitySearch(e.target.value)}
                     placeholder="search for a city"
                 />
                 <button>Search</button>
@@ -45,17 +61,17 @@ export const WeatherArea = () => {
 
             {infoAreaVisible &&
                 <div className="resultado">
-                    <div className="titulo">--</div>
+                    <div className="titulo">{cityName}</div>
 
                     <div className="info">
                         <div className="temp">
                             <div className="tempTitulo">Temperatura</div>
-                            <div className="tempInfo">-- <sup>ºC</sup></div>
-                            <img src="http://openweathermap.org/img/wn/10d@2x.png" />
+                            <div className="tempInfo">{cityTemp} <sup>ºC</sup></div>
+                            <img src={cityTempIcon} />
                         </div>
                         <div className="vento">
                             <div className="ventoTitulo">Vento</div>
-                            <div className="ventoInfo">-- <span>km/h</span></div>
+                            <div className="ventoInfo">{cityWindSpeed} <span>km/h</span></div>
                             <div className="ventoArea">
                                 <div className="ventoPonto"></div>
                             </div>

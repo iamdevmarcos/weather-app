@@ -10,7 +10,7 @@ export const WeatherArea = () => {
     const [cityTemp, setCityTemp] = useState('');
     const [cityTempIcon, setCityTempIcon] = useState('');
     const [cityWindSpeed, setCityWindSpeed] = useState('');
-    const [cityWindAngle, setCityWindAngle] = useState('');
+    const [cityWindAngle, setCityWindAngle] = useState(0);
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -24,8 +24,7 @@ export const WeatherArea = () => {
                 setCityTemp(result.main.temp);
                 setCityTempIcon(`http://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png`);
                 setCityWindSpeed(result.wind.speed);
-                setCityWindAngle(result.wind.deg);
-
+                setCityWindAngle(+result.wind.deg-90);
             }
 
             setInfoAreaVisible(true)
@@ -73,7 +72,7 @@ export const WeatherArea = () => {
                             <div className="ventoTitulo">Vento</div>
                             <div className="ventoInfo">{cityWindSpeed} <span>km/h</span></div>
                             <div className="ventoArea">
-                                <div className="ventoPonto"></div>
+                                <div className="ventoPonto" style={{transform: `rotate(${cityWindAngle}deg)`}}></div>
                             </div>
                         </div>
                     </div>

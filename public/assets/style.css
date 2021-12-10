@@ -114,10 +114,17 @@ h1 {
     transform-origin: left;
 }
 
-.warning {
+.enter {
     text-align:center;
     color: #FFF;
     font-size: 30px;
+}
+
+.warning {
+    padding-top:20px;
+    text-align:center;
+    color: #FFF;
+    font-size: 20px;
 }
 
 footer {

@@ -1,29 +1,30 @@
 import { useState, FormEvent } from 'react';
 import api from '../../services/api';
-import showMessage from '../../helpers/showMessage';
 
 export const WeatherArea = () => {
     const [cityName, setCityName] = useState('');
     const [infoAreaVisible, setInfoAreaVisible] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
     
         if(cityName !== '') {
             setInfoAreaVisible(true)
+            setErrorMessage('');
             const result = await api.getWeatherInfo(cityName);
         
             if(result) {
                 console.log('achou', result);
             } else {
                 setInfoAreaVisible(false);
-                showMessage(`City ${cityName} not found...`);
+                setErrorMessage(`City ${cityName} not found...`);
                 setCityName('');
             }
 
         } else {
             setInfoAreaVisible(false);
-            showMessage('Field cannot be empty');
+            setErrorMessage('Field cannot be empty');
         }
     }
 
@@ -61,6 +62,12 @@ export const WeatherArea = () => {
                         </div>
                     </div>
                 </div>
+
+
+            }
+
+            {errorMessage !== '' &&
+                <div className="warning">{errorMessage}</div>
             }
 
             <footer>

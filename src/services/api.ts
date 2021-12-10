@@ -1,5 +1,4 @@
 import axios from 'axios';
-import showMessage from '../helpers/showMessage';
 
 const http = axios.create({
     baseURL: 'https://api.openweathermap.org'

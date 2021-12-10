@@ -20,7 +20,7 @@ const App = () => {
     <div>
 
       {!pressEnter &&
-        <div className="warning">
+        <div className="enter">
           Press
             <C.Key onClick={e=>setPressEnter(true)}>enter</C.Key> 
           to start

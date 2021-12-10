@@ -28,8 +28,15 @@ const App = () => {
       }
 
       {pressEnter &&
-        <WeatherArea />
+        <>
+          <WeatherArea />
+
+          <footer>
+              Made with 🤍 by <a href="https://github.com/iamdevmarcos" target="_blank">Marcos Andre</a>
+          </footer>
+        </>
       }
+
     </div>
   );
 }

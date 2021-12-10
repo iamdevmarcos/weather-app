@@ -11,12 +11,12 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: #333;
+    background-color: #FFF;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 h1 {
-    color: #FFF;
+    color: #333;
     margin: 20px 0;
     text-align:center;
 }
@@ -116,27 +116,28 @@ h1 {
 
 .enter {
     text-align:center;
-    color: #FFF;
+    color: #333;
     font-size: 30px;
 }
 
 .warning {
     padding-top:20px;
     text-align:center;
-    color: #FFF;
+    color: #333;
     font-size: 20px;
 }
 
 footer {
     text-align:center;
-    color: #FFF;
+    color: #333;
     font-size: 20px;
     margin-top:100px;
 }
 
 footer a {
     text-decoration:none;
-    color:#FFF;
+    color:#000;
     border-bottom:1px solid #CCC;
-    padding-bottom:3px;
+    border-bottom-width:10px;
+    padding-bottom:-90px;
 }

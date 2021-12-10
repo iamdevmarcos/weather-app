@@ -64,12 +64,12 @@ export const WeatherArea = () => {
 
                     <div className="info">
                         <div className="temp">
-                            <div className="tempTitulo">Temperatura</div>
+                            <div className="tempTitulo">Temperature</div>
                             <div className="tempInfo">{cityTemp} <sup>ºC</sup></div>
                             <img src={cityTempIcon} />
                         </div>
                         <div className="vento">
-                            <div className="ventoTitulo">Vento</div>
+                            <div className="ventoTitulo">Wind</div>
                             <div className="ventoInfo">{cityWindSpeed} <span>km/h</span></div>
                             <div className="ventoArea">
                                 <div className="ventoPonto" style={{transform: `rotate(${cityWindAngle}deg)`}}></div>

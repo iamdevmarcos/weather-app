@@ -18,6 +18,7 @@ export const WeatherArea = () => {
             } else {
                 setInfoAreaVisible(false);
                 showMessage(`City ${cityName} not found...`);
+                setCityName('');
             }
 
         } else {

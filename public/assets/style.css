@@ -177,3 +177,22 @@ footer .heart {
 	animation-duration: 2s;
 	animation-iteration-count: infinite;
 }
+
+@media (max-width:450px) {
+    .search {
+        width: 100vw;
+    }
+
+    .result {
+        display:flex;
+        flex-direction: column;
+        align-items:center;
+        justify-content: center;
+        width:100vw;
+    }
+
+    .info {
+        flex-direction: column;
+        padding:20px;
+    }
+}

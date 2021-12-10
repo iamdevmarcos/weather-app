@@ -22,11 +22,11 @@ h1 {
     padding-bottom:10px;
 }
 
-.busca {
+.search {
     display: flex;
     width: 1250px;
 }
-.busca #searchInput {
+.search #searchInput {
     flex: 1;
     padding: 10px;
     outline: none;
@@ -36,7 +36,7 @@ h1 {
     background:#ccc;
     color:#333;
 }
-.busca button {
+.search button {
     padding: 10px;
     font-size: 15px;
     border: 0;
@@ -46,11 +46,11 @@ h1 {
     margin-left: 10px;
     cursor: pointer;
 }
-.busca button:hover {
+.search button:hover {
     background-color: #444;
 }
 
-.resultado {
+.result {
     width: 1250px;
     display: block;
     border: 1px solid #444;
@@ -59,7 +59,7 @@ h1 {
     background-color: #34495E;
 }
 
-.titulo {
+.title {
     width: 100%;
     color: #FFF;
     font-size: 40px;
@@ -76,18 +76,18 @@ h1 {
     flex: 1;
     text-align: center;
 }
-.info .vento {
+.info .wind {
     flex: 1;
     text-align: center;
 }
-.tempTitulo,
-.ventoTitulo {
+.tempTitle,
+.windTitle {
     color: #CCC;
     font-size: 16px;
     margin-bottom: 5px;
 }
 .tempInfo,
-.ventoInfo {
+.windInfo {
     color: #FFF;
     font-size: 60px;
     font-weight: bold;
@@ -96,11 +96,11 @@ h1 {
     font-size: 15px;
     font-weight: normal;
 }
-.ventoInfo span {
+.windInfo span {
     font-size: 15px;
     font-weight: normal;
 }
-.ventoArea {
+.windArea {
     width: 50px;
     height: 50px;
     border: 1px solid #FFF;
@@ -110,7 +110,7 @@ h1 {
     padding-left: 25px;
     padding-top: 25px;
 }
-.ventoPonto {
+.windPonto {
     width: 15px;
     height: 1px;
     background-color: #FFF;
@@ -145,12 +145,12 @@ footer a {
     margin-left:5px !important;
 }
 
-footer .arrow--area {
+footer .heart--area {
 	display: flex;
 	justify-content: center;
 }
 
-@keyframes arrow {
+@keyframes heart {
 	0% {
         margin-top: 0px;
     }
@@ -171,9 +171,9 @@ footer .arrow--area {
     }
 }
 
-footer .arrow {
+footer .heart {
     margin:0px 5px;
-	animation-name: arrow;
+	animation-name: heart;
 	animation-duration: 2s;
 	animation-iteration-count: infinite;
 }

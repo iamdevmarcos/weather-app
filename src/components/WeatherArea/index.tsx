@@ -18,19 +18,15 @@ export const WeatherArea = () => {
         if(citySearch !== '') {
             setErrorMessage('');
             const result = await api.getWeatherInfo(citySearch);
-
+        
             if(result) {
                 setCityName(`${result.name}, ${result.sys.country}`);
                 setCityTemp(result.main.temp);
                 setCityTempIcon(`http://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png`);
                 setCityWindSpeed(result.wind.speed);
                 setCityWindAngle(+result.wind.deg-90);
-            }
 
-            setInfoAreaVisible(true)
-        
-            if(result) {
-                console.log('achou', result);
+                setInfoAreaVisible(true);
             } else {
                 setInfoAreaVisible(false);
                 setErrorMessage(`City ${citySearch} not found...`);
@@ -47,7 +43,7 @@ export const WeatherArea = () => {
         <div>
             <h1>⛅️ Weather App</h1>
 
-            <form className="busca" onSubmit={handleSubmit}>
+            <form className="search" onSubmit={handleSubmit}>
                 <input
                     type="search"
                     id="searchInput"
@@ -59,20 +55,20 @@ export const WeatherArea = () => {
             </form>
 
             {infoAreaVisible &&
-                <div className="resultado">
-                    <div className="titulo">{cityName}</div>
+                <div className="result">
+                    <div className="title">{cityName}</div>
 
                     <div className="info">
                         <div className="temp">
-                            <div className="tempTitulo">Temperature</div>
+                            <div className="tempTitle">Temperature</div>
                             <div className="tempInfo">{cityTemp} <sup>ºC</sup></div>
                             <img src={cityTempIcon} />
                         </div>
-                        <div className="vento">
-                            <div className="ventoTitulo">Wind</div>
-                            <div className="ventoInfo">{cityWindSpeed} <span>km/h</span></div>
-                            <div className="ventoArea">
-                                <div className="ventoPonto" style={{transform: `rotate(${cityWindAngle}deg)`}}></div>
+                        <div className="wind">
+                            <div className="windTitle">Wind</div>
+                            <div className="windInfo">{cityWindSpeed} <span>km/h</span></div>
+                            <div className="windArea">
+                                <div className="windPonto" style={{transform: `rotate(${cityWindAngle}deg)`}}></div>
                             </div>
                         </div>
                     </div>

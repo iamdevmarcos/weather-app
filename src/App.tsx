@@ -32,9 +32,9 @@ const App = () => {
           <WeatherArea />
 
           <footer>
-            <div className="arrow--area">
+            <div className="heart--area">
               Made with
-              <span className="arrow">🤍</span>
+              <span className="heart">🤍</span>
               by <a href="https://github.com/iamdevmarcos" target="_blank">Marcos Andre</a>
             </div>
           </footer>

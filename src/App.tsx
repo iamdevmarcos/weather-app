@@ -35,7 +35,7 @@ const App = () => {
             <div className="arrow--area">
               Made with
               <span className="arrow">🤍</span>
-              by <a href="https://github.com/iamdevmarcos" target="_blank">Marcos </a>
+              by <a href="https://github.com/iamdevmarcos" target="_blank">Marcos Andre</a>
             </div>
           </footer>
         </>

@@ -181,6 +181,7 @@ footer .heart {
 @media (max-width:450px) {
     .search {
         width: 100vw;
+        padding:20px;
     }
 
     .result {
@@ -188,11 +189,12 @@ footer .heart {
         flex-direction: column;
         align-items:center;
         justify-content: center;
-        width:100vw;
+        max-width:90vw;
+        margin:auto;
+        padding:20px 0px;
     }
 
     .info {
         flex-direction: column;
-        padding:20px;
     }
 }

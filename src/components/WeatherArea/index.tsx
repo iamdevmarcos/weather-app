@@ -73,7 +73,7 @@ export const WeatherArea = () => {
 
             recognition.start();
         } else {
-            alert('Voice search not available for this browser.');
+            alert('Voice search not available for this browser...');
         }
     }
 

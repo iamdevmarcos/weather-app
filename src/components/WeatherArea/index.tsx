@@ -1,4 +1,4 @@
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useEffect } from 'react';
 import api from '../../services/api';
 
 declare global {
@@ -18,9 +18,10 @@ export const WeatherArea = () => {
         recognition.lang = 'pt-BR';
     }
 
-    const [listening, setListening] = useState(true);
+    const [listening, setListening] = useState(false);
 
     const [citySearch, setCitySearch] = useState('');
+    const [citySearchByMic, setCitySearchByMic] = useState('');
     const [infoAreaVisible, setInfoAreaVisible] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -29,6 +30,10 @@ export const WeatherArea = () => {
     const [cityTempIcon, setCityTempIcon] = useState('');
     const [cityWindSpeed, setCityWindSpeed] = useState('');
     const [cityWindAngle, setCityWindAngle] = useState(0);
+
+    useEffect(() => {
+        console.log(citySearchByMic);
+    }, [citySearchByMic]);
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -59,6 +64,33 @@ export const WeatherArea = () => {
 
     const handleMicSubmit = async (e: FormEvent) => {
         e.preventDefault();
+    
+        if(citySearchByMic !== '') {
+            setErrorMessage('');
+            const result = await api.getWeatherInfo(citySearchByMic);
+        
+            if(result) {
+                setCityName(`${result.name}, ${result.sys.country}`);
+                setCityTemp(result.main.temp);
+                setCityTempIcon(`http://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png`);
+                setCityWindSpeed(result.wind.speed);
+                setCityWindAngle(+result.wind.deg-90);
+
+                setInfoAreaVisible(true);
+            } else {
+                setInfoAreaVisible(false);
+                setErrorMessage(`City ${citySearchByMic} not found...`);
+                setCitySearchByMic('');
+            }
+
+        } else {
+            setInfoAreaVisible(false);
+            setErrorMessage('Field cannot be empty');
+        }
+    }
+
+    const setMicValue = async (e: FormEvent) => {
+        e.preventDefault();
 
         if(recognition !== null) {
             recognition.onstart = () => {
@@ -67,30 +99,8 @@ export const WeatherArea = () => {
             recognition.onend = () => {
                 setListening(false);
             }
-            recognition.onresult = async (e: any) => {
+            recognition.onresult = (e: any) => {
                 setCitySearch(e.results[0][0].transcript);
-
-                if(citySearch !== '') {
-                    setErrorMessage('');
-                    const result = await api.getWeatherInfo(citySearch);
-                
-                    if(result) {
-                        setCityName(`${result.name}, ${result.sys.country}`);
-                        setCityTemp(result.main.temp);
-                        setCityTempIcon(`http://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png`);
-                        setCityWindSpeed(result.wind.speed);
-                        setCityWindAngle(+result.wind.deg-90);
-        
-                        setInfoAreaVisible(true);
-                    } else {
-                        setInfoAreaVisible(false);
-                        setErrorMessage(`City ${citySearch} not found...`);
-                        setCitySearch('');
-                    }
-        
-                } else {
-                    setInfoAreaVisible(false);
-                }
             }
 
             recognition.start();
@@ -103,12 +113,15 @@ export const WeatherArea = () => {
         <div>
             <h1>⛅️ Weather App</h1>
 
-            <form className="search" onSubmit={handleSubmit}>
+            <form
+                className="search"
+                onSubmit={(citySearch !== '')?handleSubmit:handleMicSubmit}
+            >
                 <input
                     type="search"
                     id="searchInput"
-                    value={citySearch}
-                    onChange={e=>setCitySearch(e.target.value)}
+                    value={citySearchByMic}
+                    onChange={e=>setCitySearchByMic(e.target.value)}
                     placeholder="search for a city"
                 />
                 {citySearch !== '' &&
@@ -116,7 +129,7 @@ export const WeatherArea = () => {
                 }
                 {citySearch === '' &&
                     <button
-                        onClick={handleMicSubmit}
+                        onClick={setMicValue}
                         style={{backgroundColor: listening ? '#126ECE' : ''}}    
                     >
                     🎙️

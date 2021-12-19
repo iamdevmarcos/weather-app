@@ -1,7 +1,25 @@
 import { useState, FormEvent } from 'react';
 import api from '../../services/api';
 
+declare global {
+    interface Window {
+        SpeechRecognition:any;
+        webkitSpeechRecognition:any;
+    }
+}
+
 export const WeatherArea = () => {
+
+    let recognition: any = null;
+
+    let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if(SpeechRecognition !== undefined) {
+        recognition = new SpeechRecognition();
+        recognition.lang = 'pt-BR';
+    }
+
+    const [listening, setListening] = useState(true);
+
     const [citySearch, setCitySearch] = useState('');
     const [infoAreaVisible, setInfoAreaVisible] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
@@ -39,6 +57,48 @@ export const WeatherArea = () => {
         }
     }
 
+    const handleMicSubmit = async (e: FormEvent) => {
+        e.preventDefault();
+
+        if(recognition !== null) {
+            recognition.onstart = () => {
+                setListening(true);
+            }
+            recognition.onend = () => {
+                setListening(false);
+            }
+            recognition.onresult = async (e: any) => {
+                setCitySearch(e.results[0][0].transcript);
+
+                if(citySearch !== '') {
+                    setErrorMessage('');
+                    const result = await api.getWeatherInfo(citySearch);
+                
+                    if(result) {
+                        setCityName(`${result.name}, ${result.sys.country}`);
+                        setCityTemp(result.main.temp);
+                        setCityTempIcon(`http://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png`);
+                        setCityWindSpeed(result.wind.speed);
+                        setCityWindAngle(+result.wind.deg-90);
+        
+                        setInfoAreaVisible(true);
+                    } else {
+                        setInfoAreaVisible(false);
+                        setErrorMessage(`City ${citySearch} not found...`);
+                        setCitySearch('');
+                    }
+        
+                } else {
+                    setInfoAreaVisible(false);
+                }
+            }
+
+            recognition.start();
+        } else {
+            alert('Voice search not available for this browser.');
+        }
+    }
+
     return (
         <div>
             <h1>⛅️ Weather App</h1>
@@ -51,7 +111,17 @@ export const WeatherArea = () => {
                     onChange={e=>setCitySearch(e.target.value)}
                     placeholder="search for a city"
                 />
-                <button>Search</button>
+                {citySearch !== '' &&
+                    <button>Search</button>
+                }
+                {citySearch === '' &&
+                    <button
+                        onClick={handleMicSubmit}
+                        style={{backgroundColor: listening ? '#126ECE' : ''}}    
+                    >
+                    🎙️
+                    </button>
+                }
             </form>
 
             {infoAreaVisible &&

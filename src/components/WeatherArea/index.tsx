@@ -69,28 +69,6 @@ export const WeatherArea = () => {
             }
             recognition.onresult = async (e: any) => {
                 setCitySearch(e.results[0][0].transcript);
-
-                if(citySearch !== '') {
-                    setErrorMessage('');
-                    const result = await api.getWeatherInfo(citySearch);
-                
-                    if(result) {
-                        setCityName(`${result.name}, ${result.sys.country}`);
-                        setCityTemp(result.main.temp);
-                        setCityTempIcon(`http://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png`);
-                        setCityWindSpeed(result.wind.speed);
-                        setCityWindAngle(+result.wind.deg-90);
-        
-                        setInfoAreaVisible(true);
-                    } else {
-                        setInfoAreaVisible(false);
-                        setErrorMessage(`City ${citySearch} not found...`);
-                        setCitySearch('');
-                    }
-        
-                } else {
-                    setInfoAreaVisible(false);
-                }
             }
 
             recognition.start();

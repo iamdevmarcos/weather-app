@@ -18,7 +18,7 @@ export const WeatherArea = () => {
         recognition.lang = 'pt-BR';
     }
 
-    const [listening, setListening] = useState(true);
+    const [listening, setListening] = useState(false);
 
     const [citySearch, setCitySearch] = useState('');
     const [infoAreaVisible, setInfoAreaVisible] = useState(false);

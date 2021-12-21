@@ -14,9 +14,6 @@
 
 ## Running locally
 
-### Global prerequisites 
-`npm install -g nodemon typescript ts-node`
-
 ### Installation
 `npm install`
 

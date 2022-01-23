@@ -1,4 +1,4 @@
-# weather-app with reactjs
+# weather-app with reactjs.
 > a simple web app to see the weather.
 
 <img src="./public/gif/Project.gif" alt="gif">
